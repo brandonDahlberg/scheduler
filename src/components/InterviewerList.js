@@ -4,15 +4,15 @@ import InterviewerListItem from './InterviewerListItem'
 import classNames from 'classnames'
 
 export default function InterviewerList(props) {
-	const [selectedInterviewer, setInterviewer] = useState('')
+	const [value, onChange] = useState('')
 	const { interviewers } = props
 	const parsedInterviewers = interviewers.map(interviewer => {
 		return (
 			<InterviewerListItem
 				key={interviewer.id}
 				{...interviewer}
-				setInterviewer={setInterviewer}
-				selected={selectedInterviewer === interviewer.id}
+				setInterviewer={() => onChange(interviewer.id)}
+				selected={interviewer.id === value}
 			/>
 		)
 	})
