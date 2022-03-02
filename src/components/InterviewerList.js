@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import './InterviewerList.scss'
 import InterviewerListItem from './InterviewerListItem'
-import classNames from 'classnames'
 
 export default function InterviewerList(props) {
-	const [value, onChange] = useState('')
-	const { interviewers } = props
-	const parsedInterviewers = interviewers.map(interviewer => {
+	const [value, setValue] = useState('')
+	const { interviewers, setInterviewer } = props
+	const arrayOfInterviewers = []
+	for (const interviewer in interviewers) {
+		arrayOfInterviewers.push(interviewers[interviewer])
+	}
+	const parsedInterviewers = arrayOfInterviewers.map(interviewer => {
 		return (
 			<InterviewerListItem
+				setInterviewer={setInterviewer}
 				key={interviewer.id}
 				{...interviewer}
-				setInterviewer={() => onChange(interviewer.id)}
+				value={value}
 				selected={interviewer.id === value}
+				setValue={setValue}
 			/>
 		)
 	})
