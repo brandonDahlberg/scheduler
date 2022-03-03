@@ -33,15 +33,11 @@ export default function Application() {
 			...state.appointments[id],
 			interview: { ...interview },
 		}
-		console.log('appointment', appointment)
 		const appointments = {
 			...state.appointments,
 			[id]: appointment,
 		}
-		console.log('appointments', appointments)
-
 		return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then(response => {
-			console.log('response.body: ', response.body)
 			setState({
 				...state,
 				appointments,
@@ -51,7 +47,7 @@ export default function Application() {
 	const cancelInterview = (id, interview) => {
 		const appointment = {
 			...state.appointments[id],
-			interview: { ...interview },
+			interview: null,
 		}
 		console.log('appointment', appointment)
 		const appointments = {
@@ -60,8 +56,7 @@ export default function Application() {
 		}
 		console.log('appointments', appointments)
 
-		return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then(response => {
-			console.log('response.body: ', response.body)
+		return axios.delete(`http://localhost:8001/api/appointments/${id}`, { interview }).then(response => {
 			setState({
 				...state,
 				appointments,

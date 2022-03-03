@@ -15,6 +15,7 @@ const CREATE = 'CREATE'
 const SAVING = 'SAVING'
 const STATUS = 'STATUS'
 const CONFIRM = 'CONFIRM'
+const DELETING = 'DELETING'
 
 export default function Appointment(props) {
 	const { id, cancelInterview, bookInterview, interview, interviewer, interviewers, appointments } = props
@@ -29,20 +30,16 @@ export default function Appointment(props) {
 		bookInterview(id, interview).then(() => transition(SHOW))
 	}
 
-	const cancel = (name, interviewer) => {
-		transition(STATUS)
-		const interview = {
-			student: name,
-			interviewer,
-		}
-		cancelInterview(id, interview).then(() => transition(SHOW))
+	const cancel = () => {
+		transition(DELETING)
+		cancelInterview(id, interview).then(() => transition(EMPTY))
 	}
 
 	return (
 		<article className='appointment'>
 			<Header time={props.time} />
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-			{mode === SHOW && <Show CONFIRM={CONFIRM} transition={transition} interview={interview} />}
+			{mode === SHOW && <Show transition={() => transition(CONFIRM)} interview={interview} />}
 			{mode === CREATE && (
 				<Form
 					appointments={appointments}
@@ -53,8 +50,9 @@ export default function Appointment(props) {
 					bookInterview={bookInterview}
 				/>
 			)}
-			{mode === SAVING && <Status />}
-			{mode === CONFIRM && <Confirm transition={transition} SHOW={SHOW} STATUS={STATUS} cancel={cancel} />}
+			{mode === SAVING && <Status message={'Saving...'} />}
+			{mode === DELETING && <Status message={'Deleting...'} />}
+			{mode === CONFIRM && <Confirm cancel={cancel} />}
 		</article>
 	)
 }
