@@ -11,6 +11,18 @@ function getAppointmentsForDay(state, day) {
 	return appsForDay
 }
 
+function getInterviewersForDay(state, day) {
+	let filteredDays = []
+	for (let days of state.days) {
+		if (days.name === day) {
+			for (let interview of days.interviewers) {
+				filteredDays.push(state.interviewers[interview])
+			}
+		}
+	}
+	return filteredDays
+}
+
 function getInterview(state, interview) {
 	if (interview !== null) {
 		const interviewObj = {}
@@ -26,6 +38,5 @@ function getInterview(state, interview) {
 	} else return null
 }
 
-// getInterview(state, state.appointments[3].interview)
 
-module.exports = { getAppointmentsForDay, getInterview }
+module.exports = { getAppointmentsForDay, getInterview, getInterviewersForDay }
