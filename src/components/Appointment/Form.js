@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import InterviewerList from 'components/InterviewerList'
 import Button from 'components/Button'
-
+const EMPTY = "EMPTY"
 export default function Form(props) {
-	const { appointments, save, interview, interviewer: interviewerProp, interviewers, empty } = props
+	const { save, interview, interviewer: interviewerProp, interviewers, back} = props
 	const [student, setStudent] = useState(interview ? interview.student : '')
 	const [interviewer, setInterviewer] = useState(interviewerProp || null)
   const [error, setError] = useState('')
   
   function onCancel() {
-    empty();
     setStudent('')
     setInterviewer(null)
+    back()
   }
   function validate() {
     if (student === "" || interviewer === null) {

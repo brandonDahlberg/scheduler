@@ -56,8 +56,8 @@ export default function Appointment(props) {
 					appointments={appointments}
 					interviewer={interviewer}
 					save={save}
+          back={back}
 					interviewers={interviewers}
-					empty={() => transition(EMPTY)}
 					bookInterview={bookInterview}
 					interview={interview}
 				/>
@@ -70,6 +70,7 @@ export default function Appointment(props) {
 					appointments={appointments}
 					interviewer={interview ? interview.interviewer.id : interviewer}
 					save={save}
+          back={back}
 					interviewers={interviewers}
 					onCancel={() => transition(SHOW)}
 					interview={interview}
