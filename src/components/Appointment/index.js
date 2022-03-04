@@ -14,7 +14,6 @@ const EMPTY = 'EMPTY'
 const SHOW = 'SHOW'
 const CREATE = 'CREATE'
 const SAVING = 'SAVING'
-const STATUS = 'STATUS'
 const CONFIRM = 'CONFIRM'
 const DELETING = 'DELETING'
 const EDIT = 'EDIT'
@@ -24,14 +23,13 @@ const ERROR_DELETE = 'ERROR_DELETE'
 export default function Appointment(props) {
 	const { id, cancelInterview, bookInterview, interview, interviewer, interviewers, appointments } = props
 	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY)
+
 	const save = (name, interviewer) => {
 		const interview = {
 			student: name,
 			interviewer,
 		}
-
 		transition(SAVING)
-
 		bookInterview(id, interview)
 			.then(() => transition(SHOW))
 			.catch(() => transition(ERROR_SAVE, true))

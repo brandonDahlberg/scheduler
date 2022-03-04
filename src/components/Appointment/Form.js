@@ -13,6 +13,7 @@ export default function Form(props) {
     setInterviewer(null)
     back()
   }
+  
   function validate() {
     if (student === "" || interviewer === null) {
       if(student === ""){
