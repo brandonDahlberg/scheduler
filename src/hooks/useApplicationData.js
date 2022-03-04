@@ -29,15 +29,12 @@ export default function useApplicationData() {
 			interview: { ...interview },
 		}
 
-		const days = [...state.days].map(theDay => {
-			if (state.day === theDay.name) {
-				theDay.spots = theDay.spots - 1
+		const days = [...state.days].map(dayObj => {
+			if (state.day === dayObj.name) {
+				dayObj.spots = dayObj.spots - 1
 			}
-			return theDay
+			return dayObj
 		})
-		console.log(days)
-		console.log(interview)
-		console.log('appointment: ', appointment)
 
 		const appointments = {
 			...state.appointments,
@@ -51,6 +48,7 @@ export default function useApplicationData() {
 			})
 		})
 	}
+
 	const cancelInterview = (id, interview) => {
 		const appointment = {
 			...state.appointments[id],
@@ -60,16 +58,17 @@ export default function useApplicationData() {
 			...state.appointments,
 			[id]: appointment,
 		}
-		const days = [...state.days].map(theDay => {
-			if (state.day === theDay.name) {
-				theDay.spots = theDay.spots + 1
+		const days = [...state.days].map(dayObj => {
+			if (state.day === dayObj.name) {
+				dayObj.spots = dayObj.spots + 1
 			}
-			return theDay
+			return dayObj
 		})
 		return axios.delete(`http://localhost:8001/api/appointments/${id}`, { interview }).then(response => {
 			setState({
 				...state,
 				appointments,
+				days,
 			})
 		})
 	}

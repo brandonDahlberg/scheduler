@@ -38,5 +38,4 @@ function getInterview(state, interview) {
 	} else return null
 }
 
-
 module.exports = { getAppointmentsForDay, getInterview, getInterviewersForDay }

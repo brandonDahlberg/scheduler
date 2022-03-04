@@ -24,7 +24,6 @@ const ERROR_DELETE = 'ERROR_DELETE'
 export default function Appointment(props) {
 	const { id, cancelInterview, bookInterview, interview, interviewer, interviewers, appointments } = props
 	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY)
-
 	const save = (name, interviewer) => {
 		const interview = {
 			student: name,
@@ -58,7 +57,7 @@ export default function Appointment(props) {
 					interviewer={interviewer}
 					save={save}
 					interviewers={interviewers}
-					onCancel={() => transition(EMPTY)}
+					empty={() => transition(EMPTY)}
 					bookInterview={bookInterview}
 					interview={interview}
 				/>
