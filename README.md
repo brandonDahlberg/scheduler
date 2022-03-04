@@ -29,7 +29,7 @@ Default/ No Interviews... yet!
 
 !["Clean slate"](https://github.com/brandonDahlberg/scheduler/blob/master/docs/no_interviews.png?raw=true)
 
-Click anywhere on the time slot and the create interview form will be shown.
+Click the plus icon and the create interview form will be shown.
 
 !["Creating an interview 1"](https://github.com/brandonDahlberg/scheduler/blob/master/docs/create_step_1.png?raw=true)
 
